@@ -123,8 +123,8 @@ return /******/ (function(modules) { // webpackBootstrap
 "use strict";
 
 
-var pdfjsVersion = '2.0.904';
-var pdfjsBuild = '98febfa4';
+var pdfjsVersion = '2.0.906';
+var pdfjsBuild = '3d044e31';
 var pdfjsSharedUtil = __w_pdfjs_require__(1);
 var pdfjsDisplayAPI = __w_pdfjs_require__(129);
 var pdfjsDisplayTextLayer = __w_pdfjs_require__(145);
@@ -8003,7 +8003,7 @@ function _fetchDocument(worker, source, pdfDataRangeTransport, docId) {
   }
   return worker.messageHandler.sendWithPromise('GetDocRequest', {
     docId: docId,
-    apiVersion: '2.0.904',
+    apiVersion: '2.0.906',
     source: {
       data: source.data,
       url: source.url,
@@ -8302,6 +8302,9 @@ var PDFPageProxy = function PDFPageProxyClosure() {
           lastChunk: false
         };
         stats.time('Page Request');
+        if (!this.transport.messageHandler || !this.transport.messageHandler.send) {
+          throw new Error('Internal PDFJS error, there no "send" ' + ' method in transport.messageHandler');
+        }
         this.transport.messageHandler.send('RenderPageRequest', {
           pageIndex: this.pageNumber - 1,
           intent: renderingIntent,
@@ -9540,8 +9543,8 @@ var InternalRenderTask = function InternalRenderTaskClosure() {
 }();
 var version, build;
 {
-  exports.version = version = '2.0.904';
-  exports.build = build = '98febfa4';
+  exports.version = version = '2.0.906';
+  exports.build = build = '3d044e31';
 }
 exports.getDocument = getDocument;
 exports.LoopbackPort = LoopbackPort;
